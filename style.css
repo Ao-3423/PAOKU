@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* --------------------------
    PAOKU Minimal UI - Mobile Friendly
 --------------------------- */
@@ -328,52 +327,44 @@ textarea {
 }
 
 /* --------------------------
-   Quick Actions - Each Button Different Color
+   Quick Actions - New Colors
 --------------------------- */
 .quick .btn:nth-child(1) {
-    /* ฟ้าอมม่วง */
-    background: #8e7cc3;
+    background: #6a5acd;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(2) {
-    /* เขียวมิ้นต์ */
-    background: #4caf7c;
+    background: #2ecc71;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(3) {
-    /* เหลืองพาสเทล */
-    background: #ffe082;
-    color: #000;
+    background: #f1c40f;
+    color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(4) {
-    /* ชมพูอ่อน */
-    background: #f48fb1;
+    background: #e84393;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(5) {
-    /* ม่วงลาเวนเดอร์ */
-    background: #ba68c8;
+    background: #9b59b6;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(6) {
-    /* ส้มสดใส ใกล้ #ef6c00 */
-    background: #ff8a65;
+    background: #ef6c00;
     color: #fff;
     border: none;
 }
 
-
-/* Export - ส้มอมแดง */
 /* --------------------------
    Dashboard Summary
 --------------------------- */
@@ -387,13 +378,11 @@ textarea {
 
 .dashboard .stat {
     flex: 1 1 calc(33.333% - 8px);
-    /* 3 กล่องพอดี */
     background: #f3f4f6;
     padding: 12px 8px;
     border-radius: 10px;
     text-align: center;
     min-width: 100px;
-    /* ป้องกันเล็กเกินไปบนมือถือ */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
@@ -422,433 +411,5 @@ textarea {
 @media(max-width:480px) {
     .dashboard .stat {
         flex: 1 1 100%;
-        /* 3 กล่องเรียงลงล่างบนมือถือ */
     }
-=======
-/* --------------------------
-   PAOKU Minimal UI - Mobile Friendly
---------------------------- */
-:root {
-    --bg: #f9f9f9;
-    /* พื้นหลังเรียบ */
-    --card: #ffffff;
-    /* การ์ดสีขาว */
-    --muted: #6b7280;
-    /* ข้อความรอง */
-    --accent: #2563eb;
-    /* สีปุ่มหลักเรียบ */
-    --success: #16a34a;
-    /* รายรับ/บวก */
-    --danger: #dc2626;
-    /* รายจ่าย/ลบ */
-    --radius: 12px;
-    /* ความโค้งมุมลดลง */
-    --pad: 12px;
-    /* Padding เล็กลง */
-    --maxw: 440px;
-    /* ความกว้างสูงสุดมือถือ */
-    --btn-h: 42px;
-    /* ความสูงปุ่มเล็กลง */
-}
-
-/* --------------------------
-   Global
---------------------------- */
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    height: 100%;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: #111827;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.app {
-    width: 100%;
-    max-width: var(--maxw);
-    padding: 12px;
-}
-
-/* --------------------------
-   Header
---------------------------- */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-img {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-}
-
-h1 {
-    font-size: 20px;
-    margin: 0;
-    font-weight: 700;
-}
-
-p.sub {
-    margin: 0;
-    font-size: 12px;
-    color: var(--muted);
-}
-
-header .small {
-    font-size: 11px;
-    color: var(--muted);
-}
-
-/* --------------------------
-   Card
---------------------------- */
-.card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: var(--pad);
-    margin-bottom: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-/* --------------------------
-   Summary Boxes
---------------------------- */
-.summary {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.stat {
-    flex: 1;
-    background: #f3f4f6;
-    padding: 12px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.stat .v {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--accent);
-}
-
-.stat .t {
-    font-size: 13px;
-    color: var(--muted);
-}
-
-/* --------------------------
-   Quick Buttons
---------------------------- */
-.quick {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-}
-
-.btn {
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 14px;
-    min-width: 90px;
-    height: var(--btn-h);
-    transition: 0.2s;
-    text-align: center;
-    border: 1px solid #d1d5db;
-    background: #f3f4f6;
-    color: #111827;
-}
-
-.btn:hover {
-    opacity: 0.85;
-}
-
-.btn.primary {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-}
-
-.btn.danger {
-    background: var(--danger);
-    color: #fff;
-    border: none;
-}
-
-/* --------------------------
-   Forms
---------------------------- */
-form {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: 1fr 1fr;
-}
-
-label {
-    font-size: 13px;
-    color: var(--muted);
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #d1d5db;
-    background: white;
-    font-size: 13px;
-}
-
-.form-buttons {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 6px;
-}
-
-.form-group.full {
-    grid-column: 1 / 3;
-}
-
-/* --------------------------
-   Entries
---------------------------- */
-.entries {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    border-radius: 10px;
-    background: white;
-    border: 1px solid #e5e7eb;
-    flex-wrap: wrap;
-}
-
-.income {
-    color: var(--success);
-    font-weight: 600;
-}
-
-.expense {
-    color: var(--danger);
-    font-weight: 600;
-}
-
-.entry small {
-    font-size: 11px;
-    color: var(--muted);
-}
-
-/* Entry Actions */
-.entry .entry-actions {
-    display: flex;
-    gap: 5px;
-    margin-top: 4px;
-}
-
-.entry .entry-actions button {
-    padding: 4px 8px;
-    font-size: 11px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-}
-
-.entry .entry-actions .edit {
-    background-color: #22c55e;
-    color: #fff;
-}
-
-.entry .entry-actions .delete {
-    background-color: #ef4444;
-    color: #fff;
-}
-
-/* --------------------------
-   Pills & Labels
---------------------------- */
-.pill {
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: #e5e7eb;
-    font-size: 12px;
-    color: var(--accent);
-}
-
-/* --------------------------
-   Accounts
---------------------------- */
-.accounts {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.account-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-/* --------------------------
-   Utility
---------------------------- */
-.hidden {
-    display: none;
-}
-
-/* --------------------------
-   Responsive Mobile
---------------------------- */
-@media(max-width: 480px) {
-    form {
-        grid-template-columns: 1fr;
-    }
-
-    .summary {
-        flex-direction: column;
-    }
-
-    .quick {
-        flex-direction: column;
-    }
-
-    .btn {
-        min-width: 100%;
-        font-size: 14px;
-        height: var(--btn-h);
-    }
-}
-
-/* --------------------------
-   Quick Actions - Each Button Different Color
---------------------------- */
-.quick .btn:nth-child(1) {
-    /* ฟ้าอมม่วง */
-    background: #8e7cc3;
-    color: #fff;
-    border: none;
-}
-
-.quick .btn:nth-child(2) {
-    /* เขียวมิ้นต์ */
-    background: #4caf7c;
-    color: #fff;
-    border: none;
-}
-
-.quick .btn:nth-child(3) {
-    /* เหลืองพาสเทล */
-    background: #ffe082;
-    color: #000;
-    border: none;
-}
-
-.quick .btn:nth-child(4) {
-    /* ชมพูอ่อน */
-    background: #f48fb1;
-    color: #fff;
-    border: none;
-}
-
-.quick .btn:nth-child(5) {
-    /* ม่วงลาเวนเดอร์ */
-    background: #ba68c8;
-    color: #fff;
-    border: none;
-}
-
-.quick .btn:nth-child(6) {
-    /* ส้มสดใส ใกล้ #ef6c00 */
-    background: #ff8a65;
-    color: #fff;
-    border: none;
-}
-
-
-/* Export - ส้มอมแดง */
-/* --------------------------
-   Dashboard Summary
---------------------------- */
-.dashboard .summary {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.dashboard .stat {
-    flex: 1 1 calc(33.333% - 8px);
-    /* 3 กล่องพอดี */
-    background: #f3f4f6;
-    padding: 12px 8px;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 100px;
-    /* ป้องกันเล็กเกินไปบนมือถือ */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.dashboard .stat .v {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--accent);
-}
-
-.dashboard .stat .t {
-    font-size: 13px;
-    color: var(--muted);
-}
-
-.dashboard .pill {
-    display: inline-block;
-    margin-top: 4px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: #e5e7eb;
-    font-size: 12px;
-    color: var(--accent);
-}
-
-/* Responsive Mobile */
-@media(max-width:480px) {
-    .dashboard .stat {
-        flex: 1 1 100%;
-        /* 3 กล่องเรียงลงล่างบนมือถือ */
-    }
->>>>>>> 886ed9ef88a5331d3c3a3702c03d1ed51cac03df
 }
