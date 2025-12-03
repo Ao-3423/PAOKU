@@ -175,24 +175,48 @@ header .small {
 --------------------------- */
 form {
     display: grid;
-    gap: 10px;
     grid-template-columns: 1fr 1fr;
+    gap: 14px;
 }
 
 label {
     font-size: 13px;
     color: var(--muted);
+    margin-bottom: 4px;
+    display: block;
 }
 
 input,
 select,
 textarea {
     width: 100%;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 12px 12px;
+    height: 46px;
+    /* ★ ความสูงเท่ากันหมด */
+    border-radius: 12px;
     border: 1px solid #d1d5db;
-    background: white;
-    font-size: 13px;
+    background: #fff;
+    font-size: 14px;
+    appearance: none;
+    /* ให้ select เรียบ */
+}
+
+/* ช่องบันทึก (note) ใช้ความสูงเดียว */
+textarea,
+input#note {
+    height: 46px;
+}
+
+/* ช่องที่ต้องการกินพื้นที่ 2 ช่อง (บันทึก) */
+.form-group.full {
+    grid-column: 1 / 3;
+}
+
+/* ปุ่มด้านล่างของ form */
+.form-buttons {
+    grid-column: 1 / 3;
+    display: flex;
+    gap: 10px;
 }
 
 .form-buttons {
@@ -309,6 +333,15 @@ textarea {
 @media(max-width: 480px) {
     form {
         grid-template-columns: 1fr;
+        /* มือถือ → 1 คอลัมน์หมด */
+    }
+
+    .form-group.full {
+        grid-column: 1 / 2;
+    }
+
+    .form-buttons {
+        flex-direction: column;
     }
 
     .summary {
@@ -325,6 +358,8 @@ textarea {
         height: var(--btn-h);
     }
 }
+
+
 
 /* --------------------------
    Quick Actions - New Colors

@@ -16,18 +16,35 @@ let goals = JSON.parse(localStorage.getItem(KEY_GOALS) || "[]");
 // Accounts (โหลดใหม่ทุกครั้ง)
 //--------------------------------------
 let accounts = [
-  { name: "เงินสด", balance: 0 },
-  { name: "TrueMoney Wallet", balance: 0 },
-  { name: "ไทยพาณิชย์", balance: 0 },
-  { name: "ออมสิน", balance: 0 },
-  { name: "กรุงไทย", balance: 0 },
-  { name: "กรุงเทพ", balance: 0 },
-  { name: "กรุงศรีอยุธยา", balance: 0 },
-  { name: "ไทยเป๋าตัง", balance: 0 },
+  { name: "เงินสด", balance: 0, icon: "imgs/cash.png" },
+  { name: "TrueMoney Wallet", balance: 0, icon: "imgs/bank-tmw.png" },
+  { name: "ไทยพาณิชย์", balance: 0, icon: "imgs/bank-scb.png" },
+  { name: "ออมสิน", balance: 0, icon: "imgs/bank-gsb.png" },
+  { name: "กรุงไทย", balance: 0, icon: "imgs/bank-ktb.png" },
+  { name: "กรุงเทพ", balance: 0, icon: "imgs/bank-bbl.png" },
+  { name: "กรุงศรีอยุธยา", balance: 0, icon: "imgs/bank-bay.png" },
+  { name: "ไทยเป๋าตัง", balance: 0, icon: "imgs/bank-paotang.png" },
 ];
 
-// บันทึกลง localStorage ทุกครั้ง (รีเฟรชใหม่หมด)
-localStorage.setItem(KEY_ACCOUNTS, JSON.stringify(accounts));
+let accountsContainer = document.getElementById("accountsList");
+
+accounts.forEach((acc) => {
+  let div = document.createElement("div");
+  div.className = "account-item";
+
+  let img = document.createElement("img");
+  img.src = acc.icon;
+  img.alt = acc.name;
+  img.width = 32; // ขนาดรูป
+  img.height = 32;
+
+  let text = document.createElement("span");
+  text.textContent = `${acc.name}: ฿${acc.balance.toLocaleString()}`;
+
+  div.appendChild(img);
+  div.appendChild(text);
+  accountsContainer.appendChild(div);
+});
 
 //--------------------------------------
 // UI Elements
@@ -224,7 +241,8 @@ function onSubmitEntry(e) {
 }
 
 // เชื่อมฟอร์มกับ handler เดียว
-entryForm.removeEventListener && entryForm.removeEventListener("submit", onSubmitEntry);
+entryForm.removeEventListener &&
+  entryForm.removeEventListener("submit", onSubmitEntry);
 entryForm.addEventListener("submit", onSubmitEntry);
 
 //--------------------------------------
@@ -276,7 +294,9 @@ function renderGoals() {
             <div class="entry">
                 <div>
                     <div>${g.name}</div>
-                    <small>เป้าหมาย: ฿${Number(g.target || 0).toFixed(2)}</small>
+                    <small>เป้าหมาย: ฿${Number(g.target || 0).toFixed(
+                      2
+                    )}</small>
                 </div>
                 <div>
                     <button class="btn danger" onclick="deleteGoal(${i})">ลบ</button>
