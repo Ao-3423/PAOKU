@@ -540,15 +540,39 @@ textarea {
 
 }
 .entry {
-    min-height: 70px;      
+    min-height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;        
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
 }
 
-#entries {
-    max-height: calc(5 * 80px); 
-    overflow-y: auto;
-    padding-right: 4px;      
+.entry-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.entry-actions {
+    display: flex;
+    flex-direction: column; /* ปุ่มวางแนวตั้ง */
+    gap: 6px;
+}
+
+.entry-actions button {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+}
+
+.entry-actions .edit {
+    background: #3b82f6;
+    color: #fff;
+}
+
+.entry-actions .delete {
+    background: #ef4444;
+    color: #fff;
 }

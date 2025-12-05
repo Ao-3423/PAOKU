@@ -332,30 +332,30 @@ renderEntries();
 renderAccountList();
 renderGoals();
 
-// Render Entries List (แก้ไข/ลบ)
+// รายการ
 function renderEntries() {
   countEntries.innerText = `${entries.length} รายการ`;
 
   entriesDiv.innerHTML = entries
     .map(
       (e, i) => `
-            <div class="entry">
-                <div>
- <div class="${e.type}">
-  ${e.type === "income" ? "+" : "-"} ฿${formatNumber(e.amount)}
-</div>
-
-                    <small>${e.category} • ${e.note || "-"}</small>
-                    <div class="entry-actions">
-                        <button class="edit" onclick="editEntry(${i})">แก้ไข</button>
-                        <button class="delete" onclick="deleteEntry(${i})">ลบ</button>
-                    </div>
+        <div class="entry">
+            <div class="entry-left">
+                <div class="${e.type}">
+                    ${e.type === "income" ? "+" : "-"} ฿${formatNumber(
+        e.amount
+      )}
                 </div>
-                <div style="text-align:right">
-                    <small>${e.date}</small><br>
-                    <small>${accounts[e.account]?.name || "?"}</small>
-                </div>
+                <small>${e.category} • ${e.note || "-"}</small>
+                <small>${e.date}</small>
+                <small>${accounts[e.account]?.name || "?"}</small>
             </div>
+
+            <div class="entry-actions">
+                <button class="edit" onclick="editEntry(${i})">แก้ไข</button>
+                <button class="delete" onclick="deleteEntry(${i})">ลบ</button>
+            </div>
+        </div>
         `
     )
     .join("");
