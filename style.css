@@ -1,27 +1,18 @@
 /* --------------------------
-   PAOKU Minimal UI - Mobile Friendly
+   PAOKU Minimal UI - Mobile Friendly (Clean Version)
 --------------------------- */
+
 :root {
     --bg: #f9f9f9;
-    /* พื้นหลังเรียบ */
     --card: #ffffff;
-    /* การ์ดสีขาว */
     --muted: #6b7280;
-    /* ข้อความรอง */
     --accent: #2563eb;
-    /* สีปุ่มหลักเรียบ */
     --success: #16a34a;
-    /* รายรับ/บวก */
     --danger: #dc2626;
-    /* รายจ่าย/ลบ */
     --radius: 12px;
-    /* ความโค้งมุมลดลง */
     --pad: 12px;
-    /* Padding เล็กลง */
     --maxw: 440px;
-    /* ความกว้างสูงสุดมือถือ */
     --btn-h: 42px;
-    /* ความสูงปุ่มเล็กลง */
 }
 
 /* Global */
@@ -31,14 +22,14 @@
 
 html,
 body {
-    height: 100%;
     margin: 0;
+    height: 100%;
     font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: #111827;
-    padding: 0;
     display: flex;
     justify-content: center;
+    padding: 0;
 }
 
 .app {
@@ -73,14 +64,10 @@ h1 {
     font-weight: 700;
 }
 
-p.sub {
+p.sub,
+header .small {
     margin: 0;
     font-size: 12px;
-    color: var(--muted);
-}
-
-header .small {
-    font-size: 11px;
     color: var(--muted);
 }
 
@@ -90,8 +77,8 @@ header .small {
     border-radius: var(--radius);
     padding: var(--pad);
     margin-bottom: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 /* Summary Boxes */
@@ -103,10 +90,11 @@ header .small {
 
 .stat {
     flex: 1;
-    background: #f3f4f6;
     padding: 12px;
+    background: #f3f4f6;
     border-radius: 10px;
     text-align: center;
+    min-width: 100px;
 }
 
 .stat .v {
@@ -131,21 +119,21 @@ header .small {
 .btn {
     border-radius: 10px;
     display: inline-flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     cursor: pointer;
     font-size: 14px;
     min-width: 90px;
     height: var(--btn-h);
-    transition: 0.2s;
     text-align: center;
-    border: 1px solid #d1d5db;
+    transition: .2s;
     background: #f3f4f6;
+    border: 1px solid #d1d5db;
     color: #111827;
 }
 
 .btn:hover {
-    opacity: 0.85;
+    opacity: .85;
 }
 
 .btn.primary {
@@ -156,6 +144,43 @@ header .small {
 
 .btn.danger {
     background: var(--danger);
+    color: #fff;
+    border: none;
+}
+
+/* Quick Action Colors – Cute & Fresh (Bold & Dark) */
+.quick .btn:nth-child(1) {
+    background: #FF8FB1;
+    color: #fff;
+    border: none;
+}
+
+.quick .btn:nth-child(2) {
+    background: #FFB84C;
+    color: #fff;
+    border: none;
+}
+
+.quick .btn:nth-child(3) {
+    background: #FF6F61; 
+    color: #fff;
+    border: none;
+}
+
+.quick .btn:nth-child(4) {
+    background: #6EB6FF; 
+    color: #fff;
+    border: none;
+}
+
+.quick .btn:nth-child(5) {
+    background: #A58BFF; 
+    color: #fff;
+    border: none;
+}
+
+.quick .btn:nth-child(6) {
+    background: #4FD9A7; 
     color: #fff;
     border: none;
 }
@@ -204,12 +229,11 @@ textarea {
 .entry {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
     padding: 12px;
     border-radius: 10px;
     background: white;
     border: 1px solid #e5e7eb;
-    flex-wrap: wrap;
 }
 
 .income {
@@ -227,7 +251,6 @@ textarea {
     color: var(--muted);
 }
 
-/* Entry Actions */
 .entry .entry-actions {
     display: flex;
     gap: 5px;
@@ -243,25 +266,33 @@ textarea {
 }
 
 .entry .entry-actions .edit {
-    background-color: #22c55e;
+    background: #22c55e;
     color: #fff;
 }
 
 .entry .entry-actions .delete {
-    background-color: #ef4444;
+    background: #ef4444;
     color: #fff;
 }
 
-/* Pills & Labels */
+/* Pills */
 .pill {
-    padding: 4px 10px;
+    display: inline-block;
+    padding: 2px 6px;
     border-radius: 999px;
     background: #e5e7eb;
-    font-size: 12px;
+    font-size: 10px;
     color: var(--accent);
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;   
 }
 
-/* Accounts */
+
+
+/* Accounts List */
 .accounts {
     display: flex;
     flex-direction: column;
@@ -271,7 +302,6 @@ textarea {
 .account-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 10px;
     background: #fff;
     border-radius: 10px;
@@ -280,175 +310,25 @@ textarea {
 
 /* Utility */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-/* Responsive Mobile */
-@media(max-width: 480px) {
-    form {
-        grid-template-columns: 1fr;
-    }
-
-    .summary {
-        flex-direction: column;
-    }
-
-    .quick {
-        flex-direction: column;
-    }
-
-    .btn {
-        min-width: 100%;
-        font-size: 14px;
-        height: var(--btn-h);
-    }
-}
-
-
-/* Quick Actions - Each Button Different Color */
-.quick .btn:nth-child(1) {
-    background: #6a5acd;
-    color: #fff;
-    border: none;
-}
-
-.quick .btn:nth-child(2) {
-    background: #2ecc71;
-    color: #fff;
-    border: none;
-}
-
-.quick .btn:nth-child(3) {
-    /* เหลืองพาสเทล */
-    background: #ffe082;
-    color: #ffffff;
-    border: none;
-}
-
-.quick .btn:nth-child(4) {
-    background: #e84393;
-    color: #fff;
-    border: none;
-}
-
-.quick .btn:nth-child(5) {
-    background: #9b59b6;
-    color: #fff;
-    border: none;
-}
-
-.quick .btn:nth-child(6) {
-    background: #ef6c00;
-    color: #fff;
-    border: none;
-}
-
-/* Dashboard Summary */
+/* Dashboard */
 .dashboard .summary {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 8px;
 }
 
 .dashboard .stat {
     flex: 1 1 calc(33.333% - 8px);
-    background: #f3f4f6;
-    padding: 12px 8px;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 100px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.dashboard .stat .v {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--accent);
-}
-
-.dashboard .stat .t {
-    font-size: 13px;
-    color: var(--muted);
 }
 
 .dashboard .pill {
-    display: inline-block;
     margin-top: 4px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: #e5e7eb;
-    font-size: 12px;
-    color: var(--accent);
 }
 
-/* Responsive Mobile */
-@media(max-width:480px) {
-    .dashboard .stat {
-        flex: 1 1 100%;
-    }
-
-
-}
-
-.btn-green {
-    background: #16a34a;
-    color: #fff;
-}
-
-.btn-yellow {
-    background: #fbbf24;
-    color: #ffffff;
-}
-
-.btn-red {
-    background: #dc2626;
-    color: #fff;
-}
-
-/* Popup BG */
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-.popup.hidden {
-    display: none;
-}
-
-/* Box */
-.popup-box {
-    background: white;
-    padding: 20px;
-    width: 280px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.25s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.85);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Popup Background */
+/* Popup (Clean unified version) */
 .popup {
     position: fixed;
     top: 0;
@@ -462,26 +342,20 @@ textarea {
     z-index: 999;
 }
 
-.hidden {
-    display: none !important;
-}
-
-/* Popup Box */
 .popup-box {
-    background: #ffffff;
+    background: #fff;
     padding: 20px 25px;
-    border-radius: 12px;
     width: 280px;
+    border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    animation: popupFade 0.2s ease-out;
+    animation: popupFade .2s ease-out;
 }
 
-/* Fade animation */
 @keyframes popupFade {
     from {
         opacity: 0;
-        transform: scale(0.92);
+        transform: scale(.92);
     }
 
     to {
@@ -490,13 +364,11 @@ textarea {
     }
 }
 
-/* Message */
 #popupMessage {
     font-size: 16px;
     margin-bottom: 12px;
 }
 
-/* Input */
 .popup-input {
     width: 100%;
     padding: 8px;
@@ -505,31 +377,108 @@ textarea {
     border: 1px solid #ccc;
 }
 
-/* Buttons */
 .popup-buttons {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
 
-.btn-cancel {
+.btn-cancel,
+.btn-ok {
+    width: 48%;
     padding: 8px 12px;
-    background: #ccc;
     border: none;
     border-radius: 8px;
-    width: 48%;
+}
+
+.btn-cancel {
+    background: #ccc;
 }
 
 .btn-ok {
-    padding: 8px 12px;
     background: #ff4d4d;
     color: white;
-    border: none;
-    border-radius: 8px;
-    width: 48%;
 }
 
 .btn-ok:hover {
     background: #e60000;
+}
 
+/* Responsive */
+@media(max-width: 480px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .quick,
+    .summary {
+        flex-direction: column;
+    }
+
+    .btn {
+        min-width: 100%;
+    }
+
+    .dashboard .stat {
+        flex: 1 1 100%;
+    }
+}
+
+/* ปุ่มเล็กแบบมินิ */
+.btn-mini {
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+/* สีปุ่ม */
+.btn-green {
+    background-color: #2ecc71;
+}
+
+.btn-green:hover {
+    background-color: #27ae60;
+}
+
+.btn-yellow {
+    background-color: #f1c40f;
+    color: #ffffff;
+}
+
+.btn-yellow:hover {
+    background-color: #d4ac0d;
+}
+
+.btn-red {
+    background-color: #e74c3c;
+}
+
+.btn-red:hover {
+    background-color: #c0392b;
+}
+#entriesSection {
+    padding: 10px;
+}
+
+.entries-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.entries {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+#entries {
+    max-height: 200px;   /* ปรับได้ */
+    overflow-y: auto;
+    padding-right: 5px;
 }

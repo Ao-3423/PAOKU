@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PAOKU — Personal Pocket Book</title>
+    <title>PAOKU</title>
     <link rel="icon" href="./imgs/ธนาคาร.png" type="image/png" />
     <link rel="stylesheet" href="style.css">
 </head>
@@ -142,7 +142,8 @@
 
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=999"></script>
+    
     <!-- Popup ยืนยัน -->
     <div id="popupConfirm" class="popup hidden">
         <div class="popup-box">
@@ -153,13 +154,13 @@
             </div>
         </div>
     </div>
-
     <!-- Popup กรอกข้อมูล -->
     <div id="popupInputBox" class="popup hidden">
         <div class="popup-box">
             <div id="popupInputMessage"></div>
 
-            <input id="popupInput" class="popup-input" />
+            <!-- ตรงนี้จะถูกสร้าง input อัตโนมัติ -->
+            <div id="popupInputFields"></div>
 
             <div class="popup-buttons">
                 <button id="popupInputCancel" class="btn-cancel">ยกเลิก</button>
@@ -168,4 +169,5 @@
         </div>
     </div>
 </body>
+
 </html>
