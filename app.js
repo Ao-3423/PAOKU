@@ -365,15 +365,13 @@ renderGoals();
 function renderEntries() {
   countEntries.innerText = `${entries.length} รายการ`;
 
-  // เรียงใหม่สุดก่อน
-  const sorted = [...entries].reverse();
+  const sorted = entries.map((e, idx) => ({ ...e, _index: idx })).reverse();
 
-  // แสดงเฉพาะ 5 รายการบนสุดก่อน (แต่ scroll ดูทั้งหมดได้)
   const showList = sorted.slice(0, 5);
 
   entriesDiv.innerHTML = showList
     .map(
-      (e, i) => `
+      (e) => `
         <div class="entry">
           <div>
             <div class="${e.type}">
@@ -384,10 +382,10 @@ function renderEntries() {
 
             <div class="entry-actions">
               <button class="edit" onclick="editEntry(${
-                entries.length - 1 - i
+                e._index
               })">แก้ไข</button>
               <button class="delete" onclick="deleteEntry(${
-                entries.length - 1 - i
+                e._index
               })">ลบ</button>
             </div>
           </div>
@@ -467,7 +465,7 @@ function addEntryHandler(e) {
       new Date().toISOString().slice(0, 10),
   };
 
-  entries.unshift(newEntry);
+  entries.push(newEntry);
   saveEntries();
 
   recalcAccounts();
