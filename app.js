@@ -117,9 +117,10 @@ function recalcAccounts() {
   saveAccounts();
   renderAccountList();
 }
-
-// Goals Management (with deposit + edit)
+// แสดง Goals
 function renderGoals() {
+  const goalsList = document.getElementById("goalsList");
+
   if (goals.length === 0) {
     goalsList.innerHTML = "<p>ยังไม่มีเป้าหมาย</p>";
     return;
@@ -131,8 +132,8 @@ function renderGoals() {
         <div class="entry">
           <div>
             <div>${g.name}</div>
-            <small>เป้าหมาย: ฿${formatNumber(g.target)}</small>
-            <small>สะสมแล้ว: ฿${formatNumber(g.current)}</small>
+            <small>เป้าหมาย: ฿${g.target}</small>
+            <small>สะสมแล้ว: ฿${g.current}</small>
           </div>
 
           <div>
@@ -145,51 +146,49 @@ function renderGoals() {
     )
     .join("");
 }
-// Popup Confirm (ตกลง/ยกเลิก)
+
+// Popup Confirm
 function showConfirm(message, callback) {
   const box = document.getElementById("popupConfirm");
   const msg = document.getElementById("popupConfirmMessage");
-  const btnOK = document.getElementById("popupConfirmOK");
-  const btnCancel = document.getElementById("popupConfirmCancel");
 
   msg.innerText = message;
   box.classList.remove("hidden");
 
-  btnOK.onclick = () => {
+  document.getElementById("popupConfirmOK").onclick = () => {
     box.classList.add("hidden");
     callback(true);
   };
 
-  btnCancel.onclick = () => {
+  document.getElementById("popupConfirmCancel").onclick = () => {
     box.classList.add("hidden");
     callback(false);
   };
 }
 
-// Popup Input (มีช่องให้กรอก)
+// Popup Input
 function showInput(message, callback) {
   const box = document.getElementById("popupInputBox");
   const msg = document.getElementById("popupInputMessage");
   const input = document.getElementById("popupInput");
-  const btnOK = document.getElementById("popupInputOK");
-  const btnCancel = document.getElementById("popupInputCancel");
 
   msg.innerText = message;
   input.value = "";
   box.classList.remove("hidden");
 
-  btnOK.onclick = () => {
+  document.getElementById("popupInputOK").onclick = () => {
     const value = input.value.trim();
     box.classList.add("hidden");
     callback(value);
   };
 
-  btnCancel.onclick = () => {
+  document.getElementById("popupInputCancel").onclick = () => {
     box.classList.add("hidden");
     callback(false);
   };
 }
-// ฟังก์ชัน Goals
+
+// เพิ่ม Goal
 function addGoal() {
   showInput("ชื่อเป้าหมาย:", (name) => {
     if (!name) return;
@@ -205,6 +204,7 @@ function addGoal() {
   });
 }
 
+// ลบ
 function deleteGoal(i) {
   showConfirm("ต้องการลบเป้าหมายนี้?", (ok) => {
     if (!ok) return;
@@ -215,17 +215,18 @@ function deleteGoal(i) {
   });
 }
 
+// เติมเงิน
 function addMoneyToGoal(i) {
-  const goal = goals[i];
+  const g = goals[i];
 
-  showInput(`เติมเงินให้ "${goal.name}" จำนวน (บาท):`, (amountStr) => {
+  showInput(`เติมเงินให้ "${g.name}" จำนวน (บาท):`, (amountStr) => {
     const amount = parseFloat(amountStr);
     if (isNaN(amount) || amount <= 0) return alert("จำนวนเงินไม่ถูกต้อง");
 
-    goal.current += amount;
+    g.current += amount;
 
-    if (goal.current >= goal.target) {
-      alert(`🎉 เป้าหมาย "${goal.name}" บรรลุแล้ว!`);
+    if (g.current >= g.target) {
+      alert(`🎉 เป้าหมาย "${g.name}" บรรลุแล้ว!`);
     }
 
     saveGoals();
@@ -233,34 +234,45 @@ function addMoneyToGoal(i) {
   });
 }
 
+// แก้ไข
 function editGoal(i) {
-  const goal = goals[i];
+  const g = goals[i];
 
-  showInput("แก้ไขชื่อเป้าหมาย:", (newName) => {
-    if (!newName) return;
+  document.getElementById("editGoalName").value = g.name;
+  document.getElementById("editGoalTarget").value = g.target;
+  document.getElementById("editGoalCurrent").value = g.current;
 
-    showInput("แก้ไขจำนวนเงินเป้าหมาย (บาท):", (newTargetStr) => {
-      const newTarget = parseFloat(newTargetStr);
-      if (isNaN(newTarget)) return alert("จำนวนเงินไม่ถูกต้อง");
+  const box = document.getElementById("popupEditGoal");
+  box.classList.remove("hidden");
 
-      showInput("แก้ไขยอดสะสมปัจจุบัน (บาท):", (newCurrentStr) => {
-        const newCurrent = parseFloat(newCurrentStr);
-        if (isNaN(newCurrent) || newCurrent < 0)
-          return alert("จำนวนเงินไม่ถูกต้อง");
+  document.getElementById("editGoalOK").onclick = () => {
+    const name = document.getElementById("editGoalName").value.trim();
+    const target = parseFloat(document.getElementById("editGoalTarget").value);
+    const current = parseFloat(
+      document.getElementById("editGoalCurrent").value
+    );
 
-        goal.name = newName;
-        goal.target = newTarget;
-        goal.current = newCurrent;
+    if (!name || isNaN(target) || isNaN(current) || current < 0) {
+      alert("ข้อมูลไม่ถูกต้อง");
+      return;
+    }
 
-        if (goal.current >= goal.target) {
-          alert(`🎉 เป้าหมาย "${goal.name}" บรรลุแล้ว!`);
-        }
+    g.name = name;
+    g.target = target;
+    g.current = current;
 
-        saveGoals();
-        renderGoals();
-      });
-    });
-  });
+    if (g.current >= g.target) {
+      alert(`🎉 เป้าหมาย "${g.name}" บรรลุแล้ว!`);
+    }
+
+    box.classList.add("hidden");
+    saveGoals();
+    renderGoals();
+  };
+
+  document.getElementById("editGoalCancel").onclick = () => {
+    box.classList.add("hidden");
+  };
 }
 
 // Reset All
@@ -320,30 +332,30 @@ renderEntries();
 renderAccountList();
 renderGoals();
 
-// Render Entries List (แก้ไข/ลบ)
+// รายการ
 function renderEntries() {
   countEntries.innerText = `${entries.length} รายการ`;
 
   entriesDiv.innerHTML = entries
     .map(
       (e, i) => `
-            <div class="entry">
-                <div>
- <div class="${e.type}">
-  ${e.type === "income" ? "+" : "-"} ฿${formatNumber(e.amount)}
-</div>
-
-                    <small>${e.category} • ${e.note || "-"}</small>
-                    <div class="entry-actions">
-                        <button class="edit" onclick="editEntry(${i})">แก้ไข</button>
-                        <button class="delete" onclick="deleteEntry(${i})">ลบ</button>
-                    </div>
+        <div class="entry">
+            <div class="entry-left">
+                <div class="${e.type}">
+                    ${e.type === "income" ? "+" : "-"} ฿${formatNumber(
+        e.amount
+      )}
                 </div>
-                <div style="text-align:right">
-                    <small>${e.date}</small><br>
-                    <small>${accounts[e.account]?.name || "?"}</small>
-                </div>
+                <small>${e.category} • ${e.note || "-"}</small>
+                <small>${e.date}</small>
+                <small>${accounts[e.account]?.name || "?"}</small>
             </div>
+
+            <div class="entry-actions">
+                <button class="edit" onclick="editEntry(${i})">แก้ไข</button>
+                <button class="delete" onclick="deleteEntry(${i})">ลบ</button>
+            </div>
+        </div>
         `
     )
     .join("");
