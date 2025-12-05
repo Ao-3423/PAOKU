@@ -197,15 +197,15 @@ label {
     color: var(--muted);
 }
 
-form input,
-form select,
-form textarea {
+input,
+select,
+textarea {
     width: 100%;
-    padding: 8px;     
+    padding: 10px;
     border-radius: 10px;
     border: 1px solid #d1d5db;
-    font-size: 13px;
     background: white;
+    font-size: 13px;
 }
 
 
@@ -494,6 +494,10 @@ form textarea {
 }
 
 .btn.large {
-    padding: 6px 10px;
-    font-size: 12px;
+    padding: 6px 14px;
+    font-size: 13px;
+}
+
+.form-buttons .btn {
+    flex: 1;
 }
