@@ -201,13 +201,13 @@ form input,
 form select,
 form textarea {
     width: 100%;
-    padding: 8px;
-    /* เล็กลง */
+    padding: 8px;     
     border-radius: 10px;
     border: 1px solid #d1d5db;
     font-size: 13px;
     background: white;
 }
+
 
 .form-buttons {
     display: flex;
