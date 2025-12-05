@@ -197,15 +197,16 @@ label {
     color: var(--muted);
 }
 
-input,
-select,
-textarea {
+form input,
+form select,
+form textarea {
     width: 100%;
-    padding: 10px;
+    padding: 8px;
+    /* เล็กลง */
     border-radius: 10px;
     border: 1px solid #d1d5db;
-    background: white;
     font-size: 13px;
+    background: white;
 }
 
 .form-buttons {
@@ -493,6 +494,6 @@ textarea {
 }
 
 .btn.large {
-    padding: 6px 14px;
-    font-size: 13px;
+    padding: 6px 10px;
+    font-size: 12px;
 }
