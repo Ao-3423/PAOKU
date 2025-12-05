@@ -236,31 +236,46 @@ function addMoneyToGoal(i) {
 function editGoal(i) {
   const goal = goals[i];
 
-  showInput("แก้ไขชื่อเป้าหมาย:", (newName) => {
-    if (!newName) return;
+  document.getElementById("editGoalName").value = goal.name;
+  document.getElementById("editGoalTarget").value = goal.target;
+  document.getElementById("editGoalCurrent").value = goal.current;
 
-    showInput("แก้ไขจำนวนเงินเป้าหมาย (บาท):", (newTargetStr) => {
-      const newTarget = parseFloat(newTargetStr);
-      if (isNaN(newTarget)) return alert("จำนวนเงินไม่ถูกต้อง");
+  const box = document.getElementById("popupEditGoal");
+  const btnOK = document.getElementById("editGoalOK");
+  const btnCancel = document.getElementById("editGoalCancel");
 
-      showInput("แก้ไขยอดสะสมปัจจุบัน (บาท):", (newCurrentStr) => {
-        const newCurrent = parseFloat(newCurrentStr);
-        if (isNaN(newCurrent) || newCurrent < 0)
-          return alert("จำนวนเงินไม่ถูกต้อง");
+  box.classList.remove("hidden");
 
-        goal.name = newName;
-        goal.target = newTarget;
-        goal.current = newCurrent;
+  btnOK.onclick = () => {
+    const newName = document.getElementById("editGoalName").value.trim();
+    const newTarget = parseFloat(
+      document.getElementById("editGoalTarget").value
+    );
+    const newCurrent = parseFloat(
+      document.getElementById("editGoalCurrent").value
+    );
 
-        if (goal.current >= goal.target) {
-          alert(`🎉 เป้าหมาย "${goal.name}" บรรลุแล้ว!`);
-        }
+    if (!newName || isNaN(newTarget) || isNaN(newCurrent) || newCurrent < 0) {
+      alert("ข้อมูลไม่ถูกต้อง");
+      return;
+    }
 
-        saveGoals();
-        renderGoals();
-      });
-    });
-  });
+    goal.name = newName;
+    goal.target = newTarget;
+    goal.current = newCurrent;
+
+    if (goal.current >= goal.target) {
+      alert(`🎉 เป้าหมาย "${goal.name}" บรรลุแล้ว!`);
+    }
+
+    box.classList.add("hidden");
+    saveGoals();
+    renderGoals();
+  };
+
+  btnCancel.onclick = () => {
+    box.classList.add("hidden");
+  };
 }
 
 // Reset All

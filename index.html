@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PAOKU — Personal Pocket Book</title>
+    <title>PAOKU</title>
     <link rel="icon" href="./imgs/ธนาคาร.png" type="image/png" />
     <link rel="stylesheet" href="style.css">
 </head>
@@ -167,5 +167,27 @@
             </div>
         </div>
     </div>
+    <!-- Popup แก้ไขเป้าหมาย (3 ช่อง) -->
+    <div id="popupEditGoal" class="popup hidden">
+        <div class="popup-box">
+            <h3>แก้ไขเป้าหมาย</h3>
+
+            <label>ชื่อเป้าหมาย</label>
+            <input id="editGoalName" class="popup-input" />
+
+            <label>เงินเป้าหมาย (บาท)</label>
+            <input id="editGoalTarget" class="popup-input" type="number" />
+
+            <label>ยอดสะสมปัจจุบัน (บาท)</label>
+            <input id="editGoalCurrent" class="popup-input" type="number" />
+
+            <div class="popup-buttons">
+                <button id="editGoalCancel" class="btn-cancel">ยกเลิก</button>
+                <button id="editGoalOK" class="btn-ok">บันทึก</button>
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>
