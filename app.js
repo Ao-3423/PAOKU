@@ -117,9 +117,10 @@ function recalcAccounts() {
   saveAccounts();
   renderAccountList();
 }
-
-// Goals Management (with deposit + edit)
+// แสดง Goals
 function renderGoals() {
+  const goalsList = document.getElementById("goalsList");
+
   if (goals.length === 0) {
     goalsList.innerHTML = "<p>ยังไม่มีเป้าหมาย</p>";
     return;
@@ -131,8 +132,8 @@ function renderGoals() {
         <div class="entry">
           <div>
             <div>${g.name}</div>
-            <small>เป้าหมาย: ฿${formatNumber(g.target)}</small>
-            <small>สะสมแล้ว: ฿${formatNumber(g.current)}</small>
+            <small>เป้าหมาย: ฿${g.target}</small>
+            <small>สะสมแล้ว: ฿${g.current}</small>
           </div>
 
           <div>
@@ -145,51 +146,49 @@ function renderGoals() {
     )
     .join("");
 }
-// Popup Confirm (ตกลง/ยกเลิก)
+
+// Popup Confirm
 function showConfirm(message, callback) {
   const box = document.getElementById("popupConfirm");
   const msg = document.getElementById("popupConfirmMessage");
-  const btnOK = document.getElementById("popupConfirmOK");
-  const btnCancel = document.getElementById("popupConfirmCancel");
 
   msg.innerText = message;
   box.classList.remove("hidden");
 
-  btnOK.onclick = () => {
+  document.getElementById("popupConfirmOK").onclick = () => {
     box.classList.add("hidden");
     callback(true);
   };
 
-  btnCancel.onclick = () => {
+  document.getElementById("popupConfirmCancel").onclick = () => {
     box.classList.add("hidden");
     callback(false);
   };
 }
 
-// Popup Input (มีช่องให้กรอก)
+// Popup Input
 function showInput(message, callback) {
   const box = document.getElementById("popupInputBox");
   const msg = document.getElementById("popupInputMessage");
   const input = document.getElementById("popupInput");
-  const btnOK = document.getElementById("popupInputOK");
-  const btnCancel = document.getElementById("popupInputCancel");
 
   msg.innerText = message;
   input.value = "";
   box.classList.remove("hidden");
 
-  btnOK.onclick = () => {
+  document.getElementById("popupInputOK").onclick = () => {
     const value = input.value.trim();
     box.classList.add("hidden");
     callback(value);
   };
 
-  btnCancel.onclick = () => {
+  document.getElementById("popupInputCancel").onclick = () => {
     box.classList.add("hidden");
     callback(false);
   };
 }
-// ฟังก์ชัน Goals
+
+// เพิ่ม Goal
 function addGoal() {
   showInput("ชื่อเป้าหมาย:", (name) => {
     if (!name) return;
@@ -205,6 +204,7 @@ function addGoal() {
   });
 }
 
+// ลบ
 function deleteGoal(i) {
   showConfirm("ต้องการลบเป้าหมายนี้?", (ok) => {
     if (!ok) return;
@@ -215,17 +215,18 @@ function deleteGoal(i) {
   });
 }
 
+// เติมเงิน
 function addMoneyToGoal(i) {
-  const goal = goals[i];
+  const g = goals[i];
 
-  showInput(`เติมเงินให้ "${goal.name}" จำนวน (บาท):`, (amountStr) => {
+  showInput(`เติมเงินให้ "${g.name}" จำนวน (บาท):`, (amountStr) => {
     const amount = parseFloat(amountStr);
     if (isNaN(amount) || amount <= 0) return alert("จำนวนเงินไม่ถูกต้อง");
 
-    goal.current += amount;
+    g.current += amount;
 
-    if (goal.current >= goal.target) {
-      alert(`🎉 เป้าหมาย "${goal.name}" บรรลุแล้ว!`);
+    if (g.current >= g.target) {
+      alert(`🎉 เป้าหมาย "${g.name}" บรรลุแล้ว!`);
     }
 
     saveGoals();
@@ -233,39 +234,35 @@ function addMoneyToGoal(i) {
   });
 }
 
+// แก้ไข
 function editGoal(i) {
-  const goal = goals[i];
+  const g = goals[i];
 
-  document.getElementById("editGoalName").value = goal.name;
-  document.getElementById("editGoalTarget").value = goal.target;
-  document.getElementById("editGoalCurrent").value = goal.current;
+  document.getElementById("editGoalName").value = g.name;
+  document.getElementById("editGoalTarget").value = g.target;
+  document.getElementById("editGoalCurrent").value = g.current;
 
   const box = document.getElementById("popupEditGoal");
-  const btnOK = document.getElementById("editGoalOK");
-  const btnCancel = document.getElementById("editGoalCancel");
-
   box.classList.remove("hidden");
 
-  btnOK.onclick = () => {
-    const newName = document.getElementById("editGoalName").value.trim();
-    const newTarget = parseFloat(
-      document.getElementById("editGoalTarget").value
-    );
-    const newCurrent = parseFloat(
+  document.getElementById("editGoalOK").onclick = () => {
+    const name = document.getElementById("editGoalName").value.trim();
+    const target = parseFloat(document.getElementById("editGoalTarget").value);
+    const current = parseFloat(
       document.getElementById("editGoalCurrent").value
     );
 
-    if (!newName || isNaN(newTarget) || isNaN(newCurrent) || newCurrent < 0) {
+    if (!name || isNaN(target) || isNaN(current) || current < 0) {
       alert("ข้อมูลไม่ถูกต้อง");
       return;
     }
 
-    goal.name = newName;
-    goal.target = newTarget;
-    goal.current = newCurrent;
+    g.name = name;
+    g.target = target;
+    g.current = current;
 
-    if (goal.current >= goal.target) {
-      alert(`🎉 เป้าหมาย "${goal.name}" บรรลุแล้ว!`);
+    if (g.current >= g.target) {
+      alert(`🎉 เป้าหมาย "${g.name}" บรรลุแล้ว!`);
     }
 
     box.classList.add("hidden");
@@ -273,7 +270,7 @@ function editGoal(i) {
     renderGoals();
   };
 
-  btnCancel.onclick = () => {
+  document.getElementById("editGoalCancel").onclick = () => {
     box.classList.add("hidden");
   };
 }
