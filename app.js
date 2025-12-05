@@ -363,7 +363,6 @@ renderAccountList();
 renderGoals();
 
 function renderEntries() {
-
   countEntries.innerText = `${entries.length} รายการ`;
 
   // เรียงใหม่สุดก่อน
@@ -384,8 +383,12 @@ function renderEntries() {
             <small>${e.category} • ${e.note || "-"}</small>
 
             <div class="entry-actions">
-              <button class="edit" onclick="editEntry(${entries.length - 1 - i})">แก้ไข</button>
-              <button class="delete" onclick="deleteEntry(${entries.length - 1 - i})">ลบ</button>
+              <button class="edit" onclick="editEntry(${
+                entries.length - 1 - i
+              })">แก้ไข</button>
+              <button class="delete" onclick="deleteEntry(${
+                entries.length - 1 - i
+              })">ลบ</button>
             </div>
           </div>
 
@@ -398,7 +401,6 @@ function renderEntries() {
     )
     .join("");
 }
-
 
 // Delete Entry
 function deleteEntry(index) {
@@ -503,21 +505,22 @@ function exportData() {
 // Import Data จากไฟล์ JSON
 function importData(event) {
   const file = event.target.files[0];
-  if (!file) return;
+  if (!file) return alert("ไม่ได้เลือกไฟล์");
 
   const reader = new FileReader();
   reader.onload = function (e) {
+    // ลบ space และ BOM (ถ้ามี)
+    const text = e.target.result.trim().replace(/^\uFEFF/, "");
     try {
-      const data = JSON.parse(e.target.result);
+      const data = JSON.parse(text);
 
-      if (Array.isArray(data.entries)) entries = data.entries;
-      if (Array.isArray(data.accounts)) accounts = data.accounts;
-      if (Array.isArray(data.goals)) goals = data.goals;
+      entries = Array.isArray(data.entries) ? data.entries : [];
+      accounts = Array.isArray(data.accounts) ? data.accounts : [];
+      goals = Array.isArray(data.goals) ? data.goals : [];
 
       saveEntries();
       saveAccounts();
       saveGoals();
-
       recalcAccounts();
       updateSummary();
       renderEntries();
@@ -527,11 +530,11 @@ function importData(event) {
 
       alert("Import สำเร็จ!");
     } catch (err) {
-      console.error(err);
+      console.error("JSON parse error:", err);
       alert("ไฟล์ไม่ถูกต้องหรืออ่านไม่ได้");
     }
   };
-  reader.readAsText(file);
+  reader.readAsText(file, "UTF-8");
 }
 
 function showMultiInput(title, fields, callback) {
@@ -542,7 +545,7 @@ function showMultiInput(title, fields, callback) {
 
   container.innerHTML = `<h3>${title}</h3>`;
 
-  fields.forEach(f => {
+  fields.forEach((f) => {
     const div = document.createElement("div");
     div.className = "input-group";
     div.innerHTML = `
@@ -556,7 +559,7 @@ function showMultiInput(title, fields, callback) {
 
   btnOK.onclick = () => {
     const result = {};
-    fields.forEach(f => {
+    fields.forEach((f) => {
       result[f.key] = document.getElementById("multi_" + f.key).value.trim();
     });
     box.classList.add("hidden");
@@ -568,5 +571,3 @@ function showMultiInput(title, fields, callback) {
     callback(false);
   };
 }
-
-

@@ -162,25 +162,25 @@ header .small {
 }
 
 .quick .btn:nth-child(3) {
-    background: #FF6F61; 
+    background: #FF6F61;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(4) {
-    background: #6EB6FF; 
+    background: #6EB6FF;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(5) {
-    background: #A58BFF; 
+    background: #A58BFF;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(6) {
-    background: #4FD9A7; 
+    background: #4FD9A7;
     color: #fff;
     border: none;
 }
@@ -287,7 +287,7 @@ textarea {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: center;   
+    text-align: center;
 }
 
 
@@ -461,6 +461,7 @@ textarea {
 .btn-red:hover {
     background-color: #c0392b;
 }
+
 #entriesSection {
     padding: 10px;
 }
@@ -477,18 +478,21 @@ textarea {
     flex-direction: column;
     gap: 6px;
 }
+
 #entries {
-    max-height: 200px;   /* ปรับได้ */
+    max-height: 200px;
+    /* ปรับได้ */
     overflow-y: auto;
     padding-right: 5px;
 }
+
 .btn-small {
     padding: 4px 10px;
     font-size: 12px;
     border-radius: 6px;
 }
+
 .btn.large {
     padding: 6px 14px;
     font-size: 13px;
 }
-
