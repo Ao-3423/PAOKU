@@ -533,41 +533,39 @@ function importData(event) {
   };
   reader.readAsText(file);
 }
-function showMultiInput(message, fields, callback) {
-  const popup = document.getElementById("popupInputBox");
-  const msg = document.getElementById("popupInputMessage");
-  const fieldsBox = document.getElementById("popupInputFields");
+
+function showMultiInput(title, fields, callback) {
+  const box = document.getElementById("popupInputBox");
+  const container = document.getElementById("popupInputFields");
   const btnOK = document.getElementById("popupInputOK");
   const btnCancel = document.getElementById("popupInputCancel");
 
-  msg.innerText = message;
+  container.innerHTML = `<h3>${title}</h3>`;
 
-  // สร้าง input หลายช่อง
-  fieldsBox.innerHTML = "";
-  fields.forEach((f) => {
+  fields.forEach(f => {
     const div = document.createElement("div");
-    div.style.marginBottom = "8px";
+    div.className = "input-group";
     div.innerHTML = `
-      <label style="font-size:14px; display:block; margin-bottom:4px;">${f.label}</label>
-      <input type="text" data-key="${f.key}" value="${f.value}" class="popup-input" />
+      <label>${f.label}</label>
+      <input type="text" id="multi_${f.key}" value="${f.value}">
     `;
-    fieldsBox.appendChild(div);
+    container.appendChild(div);
   });
 
-  popup.classList.remove("hidden");
+  box.classList.remove("hidden");
 
   btnOK.onclick = () => {
-    const values = {};
-    fieldsBox.querySelectorAll("input").forEach((input) => {
-      values[input.dataset.key] = input.value;
+    const result = {};
+    fields.forEach(f => {
+      result[f.key] = document.getElementById("multi_" + f.key).value.trim();
     });
-
-    popup.classList.add("hidden");
-    callback(values);
+    box.classList.add("hidden");
+    callback(result);
   };
 
   btnCancel.onclick = () => {
-    popup.classList.add("hidden");
+    box.classList.add("hidden");
+    callback(false);
   };
 }
 
