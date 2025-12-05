@@ -123,7 +123,6 @@
             <div class="entries" id="entries"></div>
         </section>
 
-
         <!-- Goals Section -->
         <section id="goalsSection" class="card hidden goals-section">
             <div class="entries-header">
@@ -144,4 +143,29 @@
     </div>
 
     <script src="app.js"></script>
+    <!-- Popup ยืนยัน -->
+    <div id="popupConfirm" class="popup hidden">
+        <div class="popup-box">
+            <div id="popupConfirmMessage"></div>
+            <div class="popup-buttons">
+                <button id="popupConfirmCancel" class="btn-cancel">ยกเลิก</button>
+                <button id="popupConfirmOK" class="btn-ok">ตกลง</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup กรอกข้อมูล -->
+    <div id="popupInputBox" class="popup hidden">
+        <div class="popup-box">
+            <div id="popupInputMessage"></div>
+
+            <input id="popupInput" class="popup-input" />
+
+            <div class="popup-buttons">
+                <button id="popupInputCancel" class="btn-cancel">ยกเลิก</button>
+                <button id="popupInputOK" class="btn-ok">ตกลง</button>
+            </div>
+        </div>
+    </div>
 </body>
+</html>
