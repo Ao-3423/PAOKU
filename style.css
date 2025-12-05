@@ -540,10 +540,15 @@ textarea {
 
 }
 .entry {
-    height: 60px;  /* ถ้าทุกกล่องสูงพอประมาณ */
+    min-height: 70px;      
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;        
 }
 
 #entries {
-    max-height: calc(5 * 60px);
+    max-height: calc(5 * 80px); 
     overflow-y: auto;
+    padding-right: 4px;      
 }
