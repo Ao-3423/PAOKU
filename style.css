@@ -539,3 +539,11 @@ textarea {
     background: #e60000;
 
 }
+.entry {
+    height: 60px;  /* ถ้าทุกกล่องสูงพอประมาณ */
+}
+
+#entries {
+    max-height: calc(5 * 60px);
+    overflow-y: auto;
+}
