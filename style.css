@@ -305,49 +305,43 @@ textarea {
 }
 
 
-/* Quick Actions - Bright Soft Colors */
+/* Quick Actions - Each Button Different Color */
 .quick .btn:nth-child(1) {
-    background: #7C83FD;
-    /* Soft Indigo */
+    background: #6a5acd;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(2) {
-    background: #4CD7A1;
-    /* Mint Green */
+    background: #2ecc71;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(3) {
-    background: #FFD369;
-    /* Soft Yellow - readable */
-    color: #fff;
+    /* เหลืองพาสเทล */
+    background: #ffe082;
+    color: #ffffff;
     border: none;
 }
 
 .quick .btn:nth-child(4) {
-    background: #FF6F91;
-    /* Bright Pink */
+    background: #e84393;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(5) {
-    background: #9F6FF1;
-    /* Bright Purple */
+    background: #9b59b6;
     color: #fff;
     border: none;
 }
 
 .quick .btn:nth-child(6) {
-    background: #FF9F45;
-    /* Soft Orange */
+    background: #ef6c00;
     color: #fff;
     border: none;
 }
-
 
 /* Dashboard Summary */
 .dashboard .summary {
@@ -538,41 +532,4 @@ textarea {
 .btn-ok:hover {
     background: #e60000;
 
-}
-.entry {
-    min-height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.entry-left {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.entry-actions {
-    display: flex;
-    flex-direction: column; /* ปุ่มวางแนวตั้ง */
-    gap: 6px;
-}
-
-.entry-actions button {
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: none;
-    font-size: 14px;
-}
-
-.entry-actions .edit {
-    background: #3b82f6;
-    color: #fff;
-}
-
-.entry-actions .delete {
-    background: #ef4444;
-    color: #fff;
 }
