@@ -16,14 +16,17 @@ let entries = JSON.parse(localStorage.getItem(KEY_ENTRIES) || "[]");
 let accounts = JSON.parse(localStorage.getItem(KEY_ACCOUNTS) || "[]");
 let goals = JSON.parse(localStorage.getItem(KEY_GOALS) || "[]");
 
-// Default Accounts (โหลดครั้งแรกเท่านั้น)
-if (accounts.length === 0) {
+// ตรวจสอบโครงสร้าง accounts ว่าตรงตามระบบใหม่หรือไม่
+if (
+  !Array.isArray(accounts) ||
+  accounts.length < 8 ||
+  !accounts[0].hasOwnProperty("name") ||
+  !accounts[0].hasOwnProperty("balance")
+) {
   accounts = [
-    // กระเป๋าเงินสด / E-Wallet
     { name: "เงินสด", balance: 0 },
     { name: "เป๋าตัง", balance: 0 },
     { name: "TrueMoney Wallet", balance: 0 },
-    // ธนาคาร
     { name: "กรุงเทพ", balance: 0 },
     { name: "กรุงไทย", balance: 0 },
     { name: "กรุงศรีอยุธยา", balance: 0 },
@@ -142,10 +145,6 @@ function renderGoals() {
     )
     .join("");
 }
-//--------------------------------------
-// ระบบ Popup (Confirm + Input)
-//--------------------------------------
-
 // Popup Confirm (ตกลง/ยกเลิก)
 function showConfirm(message, callback) {
   const box = document.getElementById("popupConfirm");
@@ -190,11 +189,7 @@ function showInput(message, callback) {
     callback(false);
   };
 }
-
-//--------------------------------------
 // ฟังก์ชัน Goals
-//--------------------------------------
-
 function addGoal() {
   showInput("ชื่อเป้าหมาย:", (name) => {
     if (!name) return;
@@ -486,24 +481,6 @@ function importData(event) {
     }
   };
   reader.readAsText(file);
-}
-function showConfirm(message, onOK) {
-  const popup = document.getElementById("popupConfirm");
-  const msg = document.getElementById("popupConfirmMessage");
-  const btnOK = document.getElementById("popupConfirmOK");
-  const btnCancel = document.getElementById("popupConfirmCancel");
-
-  msg.innerText = message;
-  popup.classList.remove("hidden");
-
-  btnOK.onclick = () => {
-    popup.classList.add("hidden");
-    if (typeof onOK === "function") onOK();
-  };
-
-  btnCancel.onclick = () => {
-    popup.classList.add("hidden");
-  };
 }
 function showInputPopup(message, callback) {
   const popup = document.getElementById("popupInputBox");
