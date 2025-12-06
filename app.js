@@ -11,6 +11,9 @@ const KEY_ENTRIES = "paoku_entries";
 const KEY_ACCOUNTS = "paoku_accounts";
 const KEY_GOALS = "paoku_goals";
 
+// ต้องมีตัวนี้ก่อนใช้ entryForm
+const entryForm = document.getElementById("entryForm");
+
 // Initial Load
 let entries = JSON.parse(localStorage.getItem(KEY_ENTRIES) || "[]");
 let accounts = JSON.parse(localStorage.getItem(KEY_ACCOUNTS) || "[]");
@@ -210,6 +213,7 @@ function showInput(fields, callback) {
   };
 }
 
+// เพิ่มเป้าหมายใหม่
 function addGoal() {
   showInput(
     [
@@ -232,6 +236,7 @@ function addGoal() {
   );
 }
 
+// ลบเป้าหมาย
 function deleteGoal(i) {
   showConfirm("ต้องการลบเป้าหมายนี้?", (ok) => {
     if (!ok) return;
@@ -242,6 +247,7 @@ function deleteGoal(i) {
   });
 }
 
+// เติมเงินเข้าเป้าหมาย
 function addMoneyToGoal(i) {
   const goal = goals[i];
 
@@ -269,6 +275,7 @@ function addMoneyToGoal(i) {
   );
 }
 
+// แก้ไขเป้าหมาย
 function editGoal(i) {
   const goal = goals[i];
 
@@ -289,6 +296,10 @@ function editGoal(i) {
         return alert("จำนวนเงินเป้าหมายไม่ถูกต้อง");
       if (isNaN(newCurrent) || newCurrent < 0)
         return alert("ยอดปัจจุบันไม่ถูกต้อง");
+
+      // 🟨 จุดที่เพิ่ม: ป้องกัน current > target
+      if (newCurrent > newTarget)
+        return alert("ยอดปัจจุบันมากกว่าเป้าหมายไม่ได้");
 
       goal.name = newName;
       goal.target = newTarget;
@@ -415,6 +426,7 @@ function deleteEntry(index) {
 // Edit Entry
 function editEntry(index) {
   const e = entries[index];
+
   showSection(addSection);
 
   typeInput.value = e.type;
@@ -424,9 +436,10 @@ function editEntry(index) {
   document.getElementById("note").value = e.note;
   document.getElementById("date").value = e.date;
 
-  // ลบรายการเก่าเมื่อบันทึกใหม่
+  // กำหนดการแก้ไขแทนของเดิม
   entryForm.onsubmit = function (ev) {
     ev.preventDefault();
+
     const updatedEntry = {
       type: typeInput.value,
       amount: parseFloat(amountInput.value) || 0,
@@ -437,15 +450,18 @@ function editEntry(index) {
         document.getElementById("date").value ||
         new Date().toISOString().slice(0, 10),
     };
+
     entries[index] = updatedEntry;
+
     saveEntries();
     recalcAccounts();
     updateSummary();
     renderEntries();
+
     addSection.classList.add("hidden");
     entryForm.reset();
 
-    // รีเซ็ตฟังก์ชัน submit กลับเป็นเพิ่มรายการ
+    // รีเซ็ตกลับเป็นโหมดเพิ่มรายการ
     entryForm.onsubmit = addEntryHandler;
   };
 }
